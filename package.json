@@ -1,12 +1,13 @@
 {
   "name": "typescript-api-nginx",
-  "author": "Gabriel Cabral <gabriel.alonso2589@gmail.com>",  
+  "author": "Gabriel Cabral <gabriel.alonso2589@gmail.com>",
   "scripts": {
-    "build":"yarn tsc",
-    "start": "node build/shared/server.js",    
-    "dev":"ts-node-dev --respawn --ignore-watch node_modules src/shared/server.ts"
+    "build": "yarn tsc",
+    "start": "node build/shared/server.js",
+    "dev": "ts-node-dev --respawn --ignore-watch node_modules src/shared/server.ts"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.9.0",
     "@types/express": "^4.17.17",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
