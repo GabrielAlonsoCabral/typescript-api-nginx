@@ -10,6 +10,7 @@ services:
     depends_on:
       - api1
       - api2
+      - postgres
 
   api1:
     build:
@@ -18,6 +19,9 @@ services:
     ports:
       - "3001:3000"
     command: yarn start
+    depends_on:
+      - postgres
+
     
   api2:
     build:
@@ -26,4 +30,20 @@ services:
     ports:
       - "3002:3000"
     command: yarn start
-    
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: pg-container
+    healthcheck:
+      test: [“CMD-SHELL”, “pg_isready”]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "5432:5432"    

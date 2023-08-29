@@ -6,10 +6,10 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY yarn.lock ./
-
+COPY package.json ./
 # Install dependencies
 RUN yarn
-
+# RUN yarn build
 # Copy the rest of the application code
 COPY . .
 
