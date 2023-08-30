@@ -6,7 +6,7 @@ import prisma from "../src/shared/clients/prisma";
 async function seed() {
   
   const categoryIds:string[] = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 10000; i++) {
     const category = await prisma.productCategory.create({
       data: {
         title: faker.commerce.department(),
@@ -17,7 +17,7 @@ async function seed() {
   }
 
   // Seed products
-  for (let i = 0; i < 100000; i++) {
+  for (let i = 0; i < 1000000; i++) {
     if (i % 1000 === 0) {
       console.log('Product index:', i);
     }

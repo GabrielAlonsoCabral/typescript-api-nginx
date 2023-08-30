@@ -28,3 +28,22 @@ LEFT JOIN
     "Product" AS p ON pi."productId" = p.id
 LEFT JOIN
     "ProductCategory" AS c ON p."categoryId" = c.id;
+
+-- COUNT AMOUNT OF DATA IN TABLES
+SELECT
+  (SELECT COUNT(*) FROM "Product") AS product_count,
+  (SELECT COUNT(*) FROM "ProductImage") AS images_count,
+  (SELECT COUNT(*) FROM "ProductCategory") AS categories_count;
+
+-- CREATE MATERIALIZED VIEW FOR PRODUCTS_JOINED_CATEGORIES
+CREATE MATERIALIZED VIEW PRODUCTS_JOINED_CATEGORIES AS
+SELECT
+	  product.id,
+    product.title as "product_name",
+    product.description as "product_description",
+    product.price as "product_price",
+    product."currencyType" as "currency_type",
+    category.title as "category_name",
+    category.description as "category_description"
+	FROM "Product" product
+	LEFT JOIN "ProductCategory" category ON category.id = product."categoryId"

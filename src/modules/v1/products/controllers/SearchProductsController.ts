@@ -12,7 +12,7 @@ export default class SearchProductsController{
         try {
             const {search, limit} = productsSchema.parse(request.query)
             const { hits } = await elasticSearchClient.search({
-              index: 'all_products_index',
+              index:"search_products",
               body: {
                 size:limit,
                 query: {        
