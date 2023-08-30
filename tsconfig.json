@@ -102,7 +102,7 @@
     "skipLibCheck": true,                                     /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "./src/**/*.ts", // Include TypeScript files inside the src folder
-    "./prisma/**/*.ts" // Include TypeScript files inside the prisma folder
+    "./src/**/*.ts",
+    "./prisma/**/*.ts"
   ]
 }
