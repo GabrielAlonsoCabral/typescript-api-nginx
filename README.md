@@ -1,6 +1,10 @@
 ```markdown
 # Multi-Instance API with NGINX, PostgreSQL, Elasticsearch, and TypeScript
 
+## TODO
+
+-  **Refetch Bulking**: Every "x" minutes cronJob must search in DB only for products missing in ElasticSearch.
+In current operation is searched all products.
 ## Overview
 
 This repository contains a sample project demonstrating the setup of a multi-instance API environment using NGINX as a reverse proxy, PostgreSQL as the database, Elasticsearch for efficient querying, all built with TypeScript. The application leverages TypeScript's capabilities, including the use of Proxy to handle environment variables dynamically.

@@ -1,6 +1,6 @@
 import elasticSearchClient from "../clients/elastic";
 import ProductRepository from "../repositories/ProductRepository";
-import { IElasticServiceAttributes, IElasticServiceConstructor } from "./types/elasticService";
+import { IElasticServiceAttributes, IElasticServiceConstructor, IElasticServiceIndexes } from "./types/elasticService";
 
 
 export default class ElasticService implements IElasticServiceAttributes{
@@ -11,12 +11,10 @@ export default class ElasticService implements IElasticServiceAttributes{
     }
     
     async bulkProducts(){
-        const products = await this.productRepository.findAll() 
-               
-        const indexName = 'all_products_index';
+        const products = await this.productRepository.findAll()                
         const docType = '_doc';
               
-        this.bulkInsertData(products, indexName, docType)
+        this.bulkInsertData(products,'search_products', docType)
           .then(() => {
             console.error('Bulk inserted sucessfully!');
         })
@@ -26,7 +24,7 @@ export default class ElasticService implements IElasticServiceAttributes{
         
   } 
 
-  async bulkInsertData(data:any[], indexName:string,docType:string) {
+  async bulkInsertData(data:any[], indexName:IElasticServiceIndexes,docType:string) {
     const body = data.flatMap((doc) => [{ index: { _index: indexName, _type: docType } }, doc]);
   
     try {
@@ -39,7 +37,6 @@ export default class ElasticService implements IElasticServiceAttributes{
     } catch (error) {
       console.error('Error bulk inserting data:', error);
     }
-  }
-  
+  } 
 }
 
