@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { Currency, PrismaClient } from '@prisma/client';
+import { Currency } from '@prisma/client';
+import prisma from "../src/shared/clients/prisma";
 
-const prisma = new PrismaClient();
 
 async function seed() {
   

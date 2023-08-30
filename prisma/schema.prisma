@@ -33,6 +33,8 @@ model Product {
 
   images ProductImage[]
 
+  isActive Boolean @default(true)
+
   categoryId String @db.Uuid
   category   ProductCategory @relation(fields: [categoryId], references: [id])
 
