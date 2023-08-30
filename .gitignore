@@ -2,3 +2,6 @@ node_modules/
 .DS_Store
 build/
 .env
+
+prisma/*.js
+prisma/*.map

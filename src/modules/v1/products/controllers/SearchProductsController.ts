@@ -11,6 +11,12 @@ export default class SearchProductsController{
     async execute(request:Request, response:Response){
         try {
             const {search, limit} = productsSchema.parse(request.query)
+            if(search==='') return response.json({
+              data:{
+                products:[],
+                _count:0
+              }
+            })
             const { hits } = await elasticSearchClient.search({
               index:"search_products",
               body: {
@@ -31,24 +37,24 @@ export default class SearchProductsController{
             });
         
             const products = hits.hits.map((item:any)=>{
-              const {title, description, currencyType, price, category} = item._source
+              const {title, description, currencyType, price, category, coverUrl} = item._source
               return {
                 title,
                 description,
-                currencyType,
-                price,
-                category
+                // currencyType,
+                // price,
+                // category,
+                coverUrl
               }
-            })
-        
+            })        
             return response.json({
               data:{
                 products:products,
                 _count:hits.hits.length
               }
             })
-          } catch (error) {
-            console.error(error)
+          } catch (error:any) {
+            console.error(error?.meta?.body)
             if (error instanceof ZodError){
               return response.status(422).json({
                 error

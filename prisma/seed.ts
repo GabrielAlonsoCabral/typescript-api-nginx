@@ -26,6 +26,7 @@ async function seed() {
       data: {
         title: faker.commerce.productName(),
         description: faker.lorem.sentence(),
+        coverUrl:faker.image.avatarGitHub(),
         price: faker.commerce.price(),
         currencyType: getRandomCurrencyType(),
         images: {

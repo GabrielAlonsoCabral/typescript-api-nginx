@@ -5,4 +5,4 @@ export interface IElasticServiceAttributes{
     productRepository:ProductRepository
 }
 
-export type IElasticServiceIndexes = "search_products" | "search_categories"
+export type IElasticServiceIndexes = "search_products" | "search_products_ids"

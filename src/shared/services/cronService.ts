@@ -1,6 +1,7 @@
 import cron from 'node-cron';
 import ElasticService from './elasticService';
 import { ICronServiceAttributes, ICronServiceConstructor } from './types/cronService';
+import dayjs from 'dayjs';
 
 //@ts-ignore
 export default class CronService implements ICronServiceAttributes{
@@ -11,10 +12,12 @@ export default class CronService implements ICronServiceAttributes{
     }
     
     async bulkProducts(){
-        await this.elasticService.bulkProducts()
-        cron.schedule('*/30 * * * *', ()=>{
+        await this.elasticService.bulkProducts({})
+        cron.schedule('*/1 * * * *', ()=>{
             console.log("Running cronjob for BulkingProducts!")
-            this.elasticService.bulkProducts()
+            this.elasticService.bulkProducts({
+                startDate:dayjs().subtract(1,'minutes').toDate()
+            })
         });
     }
 }

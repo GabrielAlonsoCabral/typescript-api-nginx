@@ -28,6 +28,8 @@ model Product {
   title       String
   description String
 
+  coverUrl   String?
+
   price        String
   currencyType Currency
 

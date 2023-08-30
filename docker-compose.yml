@@ -21,6 +21,7 @@ services:
     command: yarn start
     depends_on:
       - postgres
+      - elasticsearch
 
     
   api2:
@@ -32,10 +33,13 @@ services:
     command: yarn start
     depends_on:
       - postgres
+      - elasticsearch
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
     container_name: elasticsearch
+    depends_on:
+      - postgres
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xmx512m -Xms512m"
