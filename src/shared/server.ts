@@ -1,10 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
+import elastic from './clients/elastic';
 import environment from './configs/environment';
-import { Client } from '@elastic/elasticsearch';
-
-// Create an instance of the Elasticsearch client
-const elasticSearchClient = new Client({ node: 'http://localhost:9200' }); // Replace with your Elasticsearch configuration
 
 const App = express();
 const PORT = environment.PORT;
@@ -12,7 +9,7 @@ const PORT = environment.PORT;
 App.get('/', async (req, res) => {
   try {
     // Index a document (if needed)
-    const indexResponse = await elasticSearchClient.index({
+    const indexResponse = await elastic.index({
       index: 'example-index',
       id: '1',
       body: {
@@ -22,7 +19,7 @@ App.get('/', async (req, res) => {
     });
 
     // Search for documents where title or content contains "HEL"
-    const searchOutput = await elasticSearchClient.search({
+    const searchOutput = await elastic.search({
       index: 'example-index',
       body: {
         query: {
